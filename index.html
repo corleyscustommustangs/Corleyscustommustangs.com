@@ -13,6 +13,7 @@ body {
   color: #ffffff;
 }
 
+/* HEADER */
 header {
   background-color: #000;
   border-bottom: 3px solid #ff7a00;
@@ -31,6 +32,7 @@ header p {
   color: #bbb;
 }
 
+/* NAV */
 nav {
   margin-top: 15px;
 }
@@ -46,18 +48,36 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* HERO */
 .hero {
-  padding: 80px 20px;
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  background: linear-gradient(180deg, #111, #000);
+}
+
+.hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .hero h2 {
+  position: relative;
+  z-index: 2;
+  background: rgba(0,0,0,0.75);
+  padding: 18px 28px;
   color: #ff7a00;
   font-size: 32px;
-  margin: 0;
+  border-radius: 6px;
 }
 
+/* CONTENT */
 .section {
   max-width: 1000px;
   margin: auto;
@@ -72,6 +92,7 @@ nav a:hover {
   padding-bottom: 5px;
 }
 
+/* FOOTER */
 footer {
   background: #000;
   border-top: 3px solid #ff7a00;
@@ -98,6 +119,7 @@ footer {
 </header>
 
 <section class="hero">
+  <img src="IMG_0996.webp" alt="Corleys Custom Mustangs">
   <h2>Specializing in Mustang Performance & Custom Builds</h2>
 </section>
 
