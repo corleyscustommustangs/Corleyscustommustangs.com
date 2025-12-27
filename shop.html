@@ -8,12 +8,12 @@
 <style>
 :root{
   --bg:#0b0b0b;
-  --text:#ffffff;
+  --text:#fff;
   --muted:#bdbdbd;
   --orange:#ff7a00;
-  --orange2:#ffb067;
+  --card:#101010;
+  --border:rgba(255,255,255,.10);
   --radius:16px;
-  --shadow:0 12px 34px rgba(0,0,0,.45);
   --max:1200px;
 }
 *{box-sizing:border-box}
@@ -21,20 +21,17 @@ body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,Helvetica,sans-serif;
   color:var(--text);
-  background:
-    radial-gradient(900px 500px at 20% 0%, rgba(255,122,0,.18), transparent 55%),
-    radial-gradient(900px 500px at 90% 10%, rgba(255,176,103,.10), transparent 55%),
-    var(--bg);
+  background: var(--bg);
 }
-a{text-decoration:none;color:inherit}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-/* Top Nav */
+/* Top bar (matches your style) */
 .topbar{
   position:sticky;top:0;z-index:50;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 .row{
   display:flex;gap:14px;flex-wrap:wrap;
@@ -44,7 +41,7 @@ a{text-decoration:none;color:inherit}
 .brand{display:flex;gap:12px;align-items:center}
 .logo{
   width:42px;height:42px;border-radius:14px;
-  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  background:linear-gradient(135deg,var(--orange),#ffb067);
   display:grid;place-items:center;font-weight:900;color:#000;
 }
 nav a{
@@ -55,98 +52,114 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
 .contact{font-size:12px;color:#ffd2ad}
 .contact a{font-weight:900}
 
-/* Header */
-header{
-  margin-top:20px;
-  border:1px solid rgba(255,255,255,.08);
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:20px;
+/* Page header */
+.header{
+  padding:18px 0 8px;
 }
-header h1{margin:0;font-size:28px}
-header h1 span{color:var(--orange)}
-header p{margin:8px 0 0;color:var(--muted)}
+.header h1{
+  margin:0;
+  font-size:26px;
+  letter-spacing:-.3px;
+}
+.header h1 span{color:var(--orange)}
+.header p{
+  margin:8px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
 
-/* Grid */
+/* AM-style product grid */
 .grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(4, 1fr);
   gap:14px;
-  margin:20px 0 40px;
+  padding:16px 0 34px;
 }
-.card{
-  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.08);
+.product{
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid var(--border);
   border-radius:var(--radius);
-  box-shadow:var(--shadow);
   overflow:hidden;
-  display:flex;
-  flex-direction:column;
 }
-.photo{
-  height:190px;
-  background:#000;
-  display:grid;
-  place-items:center;
-  color:#777;
-  font-weight:900;
-}
-.pad{
+.thumb{
+  background:#0d0d0d;
   padding:14px;
+  border-bottom:1px solid rgba(255,255,255,.08);
   display:flex;
-  flex-direction:column;
-  gap:10px;
-  height:100%;
-}
-.tag{
-  display:inline-block;
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:900;
-  background:rgba(255,122,0,.12);
-  border:1px solid rgba(255,122,0,.28);
-  color:#ffd2ad;
-  width:fit-content;
-}
-.name{font-size:15px;font-weight:1000;margin:0}
-.desc{margin:0;color:var(--muted);font-size:13px}
-.priceRow{
-  margin-top:auto;
-  display:flex;
-  justify-content:space-between;
+  justify-content:center;
   align-items:center;
-  padding-top:10px;
-  border-top:1px solid rgba(255,255,255,.08);
+  height:190px;
 }
-.price{font-size:18px;font-weight:1000}
-.price span{color:var(--orange)}
-.btn{
+.thumb img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  display:block;
+}
+.info{padding:12px 12px 14px}
+.badges{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-bottom:8px;
+}
+.badge{
+  font-size:11px;
+  font-weight:900;
+  padding:4px 8px;
+  border-radius:8px;
+  border:1px solid rgba(255,122,0,.35);
+  background:rgba(255,122,0,.10);
+  color:#ffd2ad;
+}
+.rating{
+  font-size:12px;
+  color:#f4f4f4;
+  opacity:.92;
+}
+.rating span{color:#9c9c9c}
+.name{
+  font-weight:900;
+  font-size:14px;
+  line-height:1.25;
+  margin:0 0 6px;
+}
+.fit{
+  margin:0 0 10px;
+  color:var(--muted);
+  font-size:12px;
+}
+.price{
+  font-weight:1000;
+  font-size:20px;
+  margin:0 0 10px;
+}
+.actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+}
+.call{
+  display:inline-block;
+  width:100%;
+  text-align:center;
   padding:10px 12px;
   border-radius:12px;
-  background:linear-gradient(135deg,var(--orange),var(--orange2));
-  color:#000;
   font-weight:1000;
-  font-size:12px;
-  white-space:nowrap;
+  color:#000;
+  background:linear-gradient(135deg,var(--orange),#ffb067);
+}
+.small{
+  display:block;
+  margin-top:8px;
+  color:#a9a9a9;
+  font-size:11px;
 }
 
-/* Footer */
-footer{
-  border-top:1px solid rgba(255,255,255,.08);
-  padding:16px 0;
-  color:var(--muted);
-  font-size:13px;
-  background:rgba(0,0,0,.35);
-}
-
-@media(max-width:1100px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:600px){
-  .grid{grid-template-columns:1fr}
-}
+/* responsive */
+@media(max-width:1100px){ .grid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:650px){ .grid{grid-template-columns:1fr} }
 </style>
 </head>
 
@@ -158,7 +171,7 @@ footer{
       <div class="logo">CM</div>
       <div>
         <strong>Corleys Custom Mustangs</strong><br>
-        <span style="font-size:12px;color:var(--muted)">Afton, OK</span>
+        <span style="font-size:12px;color:#9f9f9f">Afton, OK</span>
       </div>
     </div>
 
@@ -178,140 +191,87 @@ footer{
 </div>
 
 <div class="wrap">
-
-<header>
-  <h1><span>Shop</span> — Parts We Offer</h1>
-  <p>
-    Real Mustang parts for all years. Pricing shown is reference pricing.
-    <strong style="color:var(--orange)">Call to order</strong> so we can confirm fitment.
-  </p>
-</header>
-
-<div class="grid">
-
-  <!-- SUPERCHARGERS -->
-  <div class="card">
-    <div class="photo">SUPERCHARGER</div>
-    <div class="pad">
-      <div class="tag">Superchargers</div>
-      <p class="name">Whipple / Vortech / Ford Performance</p>
-      <p class="desc">Available for S197, S550, and S650 Mustangs.</p>
-      <div class="priceRow">
-        <div class="price"><span>$</span>6,500+</div>
-        <a class="btn" href="tel:19183148648">Call to Order</a>
-      </div>
-    </div>
+  <div class="header">
+    <h1><span>Shop</span> — Parts & Pricing</h1>
+    <p>Mustang parts for all years. Pricing shown is reference pricing. Call to order and we’ll verify fitment.</p>
   </div>
 
-  <!-- CAMS -->
-  <div class="card">
-    <div class="photo">CAMSHAFTS</div>
-    <div class="pad">
-      <div class="tag">Cams</div>
-      <p class="name">Performance Camshaft Sets</p>
-      <p class="desc">Stage 1–3 options depending on engine.</p>
-      <div class="priceRow">
-        <div class="price"><span>$</span>700+</div>
-        <a class="btn" href="tel:19183148648">Call to Order</a>
+  <div class="grid">
+
+    <!-- PRODUCT 1 -->
+    <div class="product">
+      <div class="thumb">
+        <img src="shop-img/bbk-xpipe.jpg" alt="BBK Catted X-Pipe">
+      </div>
+      <div class="info">
+        <div class="badges">
+          <div class="badge">HOT</div>
+          <div class="rating">★★★★★ <span>(452)</span></div>
+        </div>
+        <p class="name">BBK Catted X-Pipe</p>
+        <p class="fit">(05–10 Mustang GT w/ Long Tube Headers)</p>
+        <p class="price">$599.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Call for availability + shipping.</span>
       </div>
     </div>
-  </div>
 
-  <!-- EXHAUST -->
-  <div class="card">
-    <div class="photo">EXHAUST</div>
-    <div class="pad">
-      <div class="tag">Exhaust</div>
-      <p class="name">Borla / Corsa / Roush</p>
-      <p class="desc">Axle-back, cat-back, headers available.</p>
-      <div class="priceRow">
-        <div class="price"><span>$</span>600+</div>
-        <a class="btn" href="tel:19183148648">Call to Order</a>
+    <!-- PRODUCT 2 -->
+    <div class="product">
+      <div class="thumb">
+        <img src="shop-img/bbk-lt-polished.jpg" alt="BBK 1-5/8 Long Tube Headers Polished Silver Ceramic">
+      </div>
+      <div class="info">
+        <div class="badges">
+          <div class="badge">HOT</div>
+          <div class="rating">★★★★☆ <span>(443)</span></div>
+        </div>
+        <p class="name">BBK 1-5/8&quot; Long Tube Headers; Polished Silver Ceramic</p>
+        <p class="fit">(05–10 Mustang GT)</p>
+        <p class="price">$819.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">We’ll confirm fitment + needed add-ons.</span>
       </div>
     </div>
-  </div>
 
-  <!-- SUSPENSION -->
-  <div class="card">
-    <div class="photo">SUSPENSION</div>
-    <div class="pad">
-      <div class="tag">Suspension</div>
-      <p class="name">Street & Track Packages</p>
-      <p class="desc">Springs, coilovers, control arms.</p>
-      <div class="priceRow">
-        <div class="price"><span>$</span>800+</div>
-        <a class="btn" href="tel:19183148648">Call to Order</a>
+    <!-- PRODUCT 3 -->
+    <div class="product">
+      <div class="thumb">
+        <img src="shop-img/bbk-lt-titanium.jpg" alt="BBK 1-5/8 Long Tube Headers Titanium Ceramic">
+      </div>
+      <div class="info">
+        <div class="badges">
+          <div class="badge">HOT</div>
+          <div class="rating">★★★★☆ <span>(443)</span></div>
+        </div>
+        <p class="name">BBK 1-5/8&quot; Long Tube Headers; Titanium Ceramic</p>
+        <p class="fit">(05–10 Mustang GT)</p>
+        <p class="price">$769.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Ask about install bundles.</span>
       </div>
     </div>
-  </div>
 
-  <!-- INTAKES -->
-  <div class="card">
-    <div class="photo">INTAKES</div>
-    <div class="pad">
-      <div class="tag">Cold Air</div>
-      <p class="name">Cold Air Intake Kits</p>
-      <p class="desc">NA & boosted applications.</p>
-      <div class="priceRow">
-        <div class="price"><span>$</span>200+</div>
-        <a class="btn" href="tel:19183148648">Call to Order</a>
+    <!-- PRODUCT 4 -->
+    <div class="product">
+      <div class="thumb">
+        <img src="shop-img/bbk-header-gaskets.jpg" alt="BBK Premium Header Gaskets">
+      </div>
+      <div class="info">
+        <div class="badges">
+          <div class="badge">Recommended</div>
+          <div class="rating">★★★★☆ <span>(118)</span></div>
+        </div>
+        <p class="name">BBK Premium Header Gaskets</p>
+        <p class="fit">(05–10 Mustang GT)</p>
+        <p class="price">$29.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Good add-on with header installs.</span>
       </div>
     </div>
-  </div>
 
-  <!-- LIGHTING -->
-  <div class="card">
-    <div class="photo">LIGHTING</div>
-    <div class="pad">
-      <div class="tag">Lighting</div>
-      <p class="name">Headlights, Tails, LEDs</p>
-      <p class="desc">OEM-style and custom lighting.</p>
-      <div class="priceRow">
-        <div class="price"><span>$</span>150+</div>
-        <a class="btn" href="tel:19183148648">Call to Order</a>
-      </div>
-    </div>
   </div>
-
-  <!-- INTERIOR -->
-  <div class="card">
-    <div class="photo">INTERIOR</div>
-    <div class="pad">
-      <div class="tag">Interior</div>
-      <p class="name">Seats, Trim, Shifters</p>
-      <p class="desc">Comfort and performance upgrades.</p>
-      <div class="priceRow">
-        <div class="price"><span>$</span>150+</div>
-        <a class="btn" href="tel:19183148648">Call to Order</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- DRESS UP -->
-  <div class="card">
-    <div class="photo">ENGINE DRESS UP</div>
-    <div class="pad">
-      <div class="tag">Dress Up</div>
-      <p class="name">Covers, Hardware, Gaskets</p>
-      <p class="desc">Clean up the engine bay.</p>
-      <div class="priceRow">
-        <div class="price"><span>$</span>100+</div>
-        <a class="btn" href="tel:19183148648">Call to Order</a>
-      </div>
-    </div>
-  </div>
-
 </div>
-
-<footer>
-  © <span id="y"></span> Corleys Custom Mustangs • Pricing subject to change.
-</footer>
-
-</div>
-
-<script>
-document.getElementById("y").textContent = new Date().getFullYear();
-</script>
 
 </body>
 </html>
