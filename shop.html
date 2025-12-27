@@ -11,8 +11,9 @@
   --text:#fff;
   --muted:#bdbdbd;
   --orange:#ff7a00;
-  --card:#101010;
+  --orange2:#ffb067;
   --border:rgba(255,255,255,.10);
+  --card:rgba(255,255,255,.04);
   --radius:16px;
   --max:1200px;
 }
@@ -21,12 +22,15 @@ body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,Helvetica,sans-serif;
   color:var(--text);
-  background: var(--bg);
+  background:
+    radial-gradient(900px 500px at 20% 0%, rgba(255,122,0,.18), transparent 55%),
+    radial-gradient(900px 500px at 90% 10%, rgba(255,176,103,.10), transparent 55%),
+    var(--bg);
 }
 a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
 
-/* Top bar (matches your style) */
+/* Top bar */
 .topbar{
   position:sticky;top:0;z-index:50;
   background:rgba(0,0,0,.78);
@@ -41,7 +45,7 @@ a{color:inherit;text-decoration:none}
 .brand{display:flex;gap:12px;align-items:center}
 .logo{
   width:42px;height:42px;border-radius:14px;
-  background:linear-gradient(135deg,var(--orange),#ffb067);
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
   display:grid;place-items:center;font-weight:900;color:#000;
 }
 nav a{
@@ -53,22 +57,78 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
 .contact a{font-weight:900}
 
 /* Page header */
-.header{
-  padding:18px 0 8px;
-}
-.header h1{
-  margin:0;
-  font-size:26px;
-  letter-spacing:-.3px;
-}
+.header{padding:18px 0 10px}
+.header h1{margin:0;font-size:26px;letter-spacing:-.3px}
 .header h1 span{color:var(--orange)}
-.header p{
-  margin:8px 0 0;
-  color:var(--muted);
-  font-size:14px;
+.header p{margin:8px 0 0;color:var(--muted);font-size:14px}
+
+/* Toolbar (search/sort) */
+.toolbar{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid var(--border);
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border-radius:var(--radius);
+  padding:12px;
+}
+.search{
+  flex:1;
+  min-width:220px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.search input{
+  width:100%;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.35);
+  color:var(--text);
+  outline:none;
+}
+.search input::placeholder{color:#8f8f8f}
+.sort{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.sort select{
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.35);
+  color:var(--text);
 }
 
-/* AM-style product grid */
+/* Category tabs */
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.tab{
+  cursor:pointer;
+  user-select:none;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,122,0,.28);
+  background:rgba(255,122,0,.10);
+  color:#ffd2ad;
+  font-weight:900;
+  font-size:12px;
+}
+.tab.active{
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  color:#000;
+  border-color:rgba(0,0,0,.25);
+}
+
+/* Grid */
 .grid{
   display:grid;
   grid-template-columns:repeat(4, 1fr);
@@ -76,88 +136,55 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
   padding:16px 0 34px;
 }
 .product{
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
   border:1px solid var(--border);
   border-radius:var(--radius);
   overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
 }
 .thumb{
+  height:190px;
   background:#0d0d0d;
-  padding:14px;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:12px;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:190px;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 .thumb img{
-  max-width:100%;
-  max-height:100%;
+  width:100%;
+  height:100%;
   object-fit:contain;
   display:block;
 }
 .info{padding:12px 12px 14px}
-.badges{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  margin-bottom:8px;
-}
+.badges{display:flex;gap:8px;align-items:center;margin-bottom:8px}
 .badge{
-  font-size:11px;
-  font-weight:900;
-  padding:4px 8px;
-  border-radius:8px;
+  font-size:11px;font-weight:900;
+  padding:4px 8px;border-radius:8px;
   border:1px solid rgba(255,122,0,.35);
   background:rgba(255,122,0,.10);
   color:#ffd2ad;
 }
-.rating{
-  font-size:12px;
-  color:#f4f4f4;
-  opacity:.92;
-}
+.rating{font-size:12px;color:#f4f4f4;opacity:.92}
 .rating span{color:#9c9c9c}
-.name{
-  font-weight:900;
-  font-size:14px;
-  line-height:1.25;
-  margin:0 0 6px;
-}
-.fit{
-  margin:0 0 10px;
-  color:var(--muted);
-  font-size:12px;
-}
-.price{
-  font-weight:1000;
-  font-size:20px;
-  margin:0 0 10px;
-}
-.actions{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:space-between;
-}
+.name{font-weight:1000;font-size:14px;line-height:1.25;margin:0 0 6px}
+.fit{margin:0 0 10px;color:var(--muted);font-size:12px}
+.price{font-weight:1000;font-size:20px;margin:0 0 10px}
 .call{
-  display:inline-block;
+  display:block;
   width:100%;
   text-align:center;
   padding:10px 12px;
   border-radius:12px;
   font-weight:1000;
   color:#000;
-  background:linear-gradient(135deg,var(--orange),#ffb067);
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
 }
-.small{
-  display:block;
-  margin-top:8px;
-  color:#a9a9a9;
-  font-size:11px;
-}
+.small{display:block;margin-top:8px;color:#a9a9a9;font-size:11px}
 
-/* responsive */
+.hidden{display:none !important}
+
+/* Responsive */
 @media(max-width:1100px){ .grid{grid-template-columns:repeat(2,1fr)} }
 @media(max-width:650px){ .grid{grid-template-columns:1fr} }
 </style>
@@ -193,21 +220,46 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
 <div class="wrap">
   <div class="header">
     <h1><span>Shop</span> — Parts & Pricing</h1>
-    <p>Mustang parts for all years. Pricing shown is reference pricing. Call to order and we’ll verify fitment.</p>
+    <p>Browse categories like a catalog. Call to order and we’ll verify fitment for your Mustang.</p>
   </div>
 
-  <div class="grid">
+  <div class="toolbar">
+    <div class="search">
+      <input id="search" type="text" placeholder="Search parts (ex: headers, x-pipe, whipple, intake, wheels)..." />
+    </div>
+    <div class="sort">
+      <label for="sort" style="color:var(--muted);font-size:12px;font-weight:900;">Sort:</label>
+      <select id="sort">
+        <option value="featured">Featured</option>
+        <option value="priceLow">Price: Low → High</option>
+        <option value="priceHigh">Price: High → Low</option>
+        <option value="nameAZ">Name: A → Z</option>
+      </select>
+    </div>
+  </div>
 
-    <!-- PRODUCT 1 -->
-    <div class="product">
-      <div class="thumb">
-        <img src="shop-img/bbk-xpipe.jpg" alt="BBK Catted X-Pipe">
-      </div>
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-cat="all">All</div>
+    <div class="tab" data-cat="exhaust">Exhaust</div>
+    <div class="tab" data-cat="superchargers">Superchargers</div>
+    <div class="tab" data-cat="cai">Cold Air</div>
+    <div class="tab" data-cat="cams">Cams</div>
+    <div class="tab" data-cat="suspension">Suspension</div>
+    <div class="tab" data-cat="wheels">Wheels</div>
+    <div class="tab" data-cat="lighting">Lighting</div>
+    <div class="tab" data-cat="gaskets">Gaskets</div>
+    <div class="tab" data-cat="interior">Interior</div>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- NOTE: These are "slots". Upload matching images into /shop-img/ then they show. -->
+
+    <!-- EXHAUST (AM example set) -->
+    <div class="product" data-cat="exhaust" data-name="BBK Catted X-Pipe" data-price="599.99">
+      <div class="thumb"><img src="shop-img/bbk-xpipe.jpg" alt="BBK Catted X-Pipe"></div>
       <div class="info">
-        <div class="badges">
-          <div class="badge">HOT</div>
-          <div class="rating">★★★★★ <span>(452)</span></div>
-        </div>
+        <div class="badges"><div class="badge">HOT</div><div class="rating">★★★★★ <span>(452)</span></div></div>
         <p class="name">BBK Catted X-Pipe</p>
         <p class="fit">(05–10 Mustang GT w/ Long Tube Headers)</p>
         <p class="price">$599.99</p>
@@ -216,62 +268,257 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
       </div>
     </div>
 
-    <!-- PRODUCT 2 -->
-    <div class="product">
-      <div class="thumb">
-        <img src="shop-img/bbk-lt-polished.jpg" alt="BBK 1-5/8 Long Tube Headers Polished Silver Ceramic">
-      </div>
+    <div class="product" data-cat="exhaust" data-name="BBK 1-5/8 Long Tube Headers Polished" data-price="819.99">
+      <div class="thumb"><img src="shop-img/bbk-lt-polished.jpg" alt="BBK Long Tube Headers Polished"></div>
       <div class="info">
-        <div class="badges">
-          <div class="badge">HOT</div>
-          <div class="rating">★★★★☆ <span>(443)</span></div>
-        </div>
-        <p class="name">BBK 1-5/8&quot; Long Tube Headers; Polished Silver Ceramic</p>
+        <div class="badges"><div class="badge">HOT</div><div class="rating">★★★★☆ <span>(443)</span></div></div>
+        <p class="name">BBK 1-5/8&quot; Long Tube Headers (Polished Ceramic)</p>
         <p class="fit">(05–10 Mustang GT)</p>
         <p class="price">$819.99</p>
         <a class="call" href="tel:19183148648">Call to Order</a>
-        <span class="small">We’ll confirm fitment + needed add-ons.</span>
+        <span class="small">Ask about install bundle pricing.</span>
       </div>
     </div>
 
-    <!-- PRODUCT 3 -->
-    <div class="product">
-      <div class="thumb">
-        <img src="shop-img/bbk-lt-titanium.jpg" alt="BBK 1-5/8 Long Tube Headers Titanium Ceramic">
-      </div>
+    <div class="product" data-cat="exhaust" data-name="BBK 1-5/8 Long Tube Headers Titanium" data-price="769.99">
+      <div class="thumb"><img src="shop-img/bbk-lt-titanium.jpg" alt="BBK Long Tube Headers Titanium"></div>
       <div class="info">
-        <div class="badges">
-          <div class="badge">HOT</div>
-          <div class="rating">★★★★☆ <span>(443)</span></div>
-        </div>
-        <p class="name">BBK 1-5/8&quot; Long Tube Headers; Titanium Ceramic</p>
+        <div class="badges"><div class="badge">HOT</div><div class="rating">★★★★☆ <span>(443)</span></div></div>
+        <p class="name">BBK 1-5/8&quot; Long Tube Headers (Titanium Ceramic)</p>
         <p class="fit">(05–10 Mustang GT)</p>
         <p class="price">$769.99</p>
         <a class="call" href="tel:19183148648">Call to Order</a>
-        <span class="small">Ask about install bundles.</span>
+        <span class="small">We’ll confirm fitment + extras needed.</span>
       </div>
     </div>
 
-    <!-- PRODUCT 4 -->
-    <div class="product">
-      <div class="thumb">
-        <img src="shop-img/bbk-header-gaskets.jpg" alt="BBK Premium Header Gaskets">
-      </div>
+    <div class="product" data-cat="gaskets" data-name="BBK Premium Header Gaskets" data-price="29.99">
+      <div class="thumb"><img src="shop-img/bbk-header-gaskets.jpg" alt="BBK Premium Header Gaskets"></div>
       <div class="info">
-        <div class="badges">
-          <div class="badge">Recommended</div>
-          <div class="rating">★★★★☆ <span>(118)</span></div>
-        </div>
+        <div class="badges"><div class="badge">Recommended</div><div class="rating">★★★★☆ <span>(118)</span></div></div>
         <p class="name">BBK Premium Header Gaskets</p>
         <p class="fit">(05–10 Mustang GT)</p>
         <p class="price">$29.99</p>
         <a class="call" href="tel:19183148648">Call to Order</a>
-        <span class="small">Good add-on with header installs.</span>
+        <span class="small">Great add-on for header installs.</span>
+      </div>
+    </div>
+
+    <!-- Add more EXHAUST slots (upload images & keep pricing) -->
+    <div class="product" data-cat="exhaust" data-name="Borla Cat-Back Exhaust" data-price="1399.99">
+      <div class="thumb"><img src="shop-img/borla-catback.jpg" alt="Borla Cat-Back Exhaust"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Popular</div><div class="rating">★★★★★ <span>(300+)</span></div></div>
+        <p class="name">Borla Cat-Back Exhaust</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$1,399.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">We’ll match your build goals (quiet/loud).</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="exhaust" data-name="Corsa Cat-Back Exhaust" data-price="1499.99">
+      <div class="thumb"><img src="shop-img/corsa-catback.jpg" alt="Corsa Cat-Back Exhaust"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Popular</div><div class="rating">★★★★★ <span>(200+)</span></div></div>
+        <p class="name">Corsa Cat-Back Exhaust</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$1,499.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Clean sound & great fitment.</span>
+      </div>
+    </div>
+
+    <!-- SUPERCHARGERS -->
+    <div class="product" data-cat="superchargers" data-name="Whipple Supercharger Kit" data-price="7999.99">
+      <div class="thumb"><img src="shop-img/whipple-kit.jpg" alt="Whipple Supercharger Kit"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Boost</div><div class="rating">★★★★★ <span>(Top pick)</span></div></div>
+        <p class="name">Whipple Supercharger Kit</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$7,999.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Fuel, tune, and supporting mods vary.</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="superchargers" data-name="Vortech Supercharger Kit" data-price="6899.99">
+      <div class="thumb"><img src="shop-img/vortech-kit.jpg" alt="Vortech Supercharger Kit"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Boost</div><div class="rating">★★★★★ <span>(Top pick)</span></div></div>
+        <p class="name">Vortech Supercharger Kit</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$6,899.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Great street/track option.</span>
+      </div>
+    </div>
+
+    <!-- COLD AIR -->
+    <div class="product" data-cat="cai" data-name="JLT Cold Air Intake" data-price="389.99">
+      <div class="thumb"><img src="shop-img/jlt-intake.jpg" alt="JLT Cold Air Intake"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Popular</div><div class="rating">★★★★★ <span>(400+)</span></div></div>
+        <p class="name">JLT Cold Air Intake</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$389.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Tune requirements vary by year.</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="cai" data-name="Roush Cold Air Intake" data-price="449.99">
+      <div class="thumb"><img src="shop-img/roush-intake.jpg" alt="Roush Cold Air Intake"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Popular</div><div class="rating">★★★★★ <span>(200+)</span></div></div>
+        <p class="name">Roush Cold Air Intake</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$449.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Great OEM+ style option.</span>
+      </div>
+    </div>
+
+    <!-- CAMS -->
+    <div class="product" data-cat="cams" data-name="Comp Cams Performance Set" data-price="859.99">
+      <div class="thumb"><img src="shop-img/comp-cams.jpg" alt="Comp Cams Set"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Cam</div><div class="rating">★★★★☆ <span>(100+)</span></div></div>
+        <p class="name">Comp Cams Performance Set</p>
+        <p class="fit">(Call with engine/year)</p>
+        <p class="price">$859.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Tune required after install.</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="cams" data-name="Ford Performance Cams" data-price="999.99">
+      <div class="thumb"><img src="shop-img/ford-performance-cams.jpg" alt="Ford Performance Cams"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">OEM+</div><div class="rating">★★★★★ <span>(Popular)</span></div></div>
+        <p class="name">Ford Performance Cam Kit</p>
+        <p class="fit">(Call with engine/year)</p>
+        <p class="price">$999.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Great drivability with gains.</span>
+      </div>
+    </div>
+
+    <!-- SUSPENSION -->
+    <div class="product" data-cat="suspension" data-name="BMR Suspension Components" data-price="249.99">
+      <div class="thumb"><img src="shop-img/bmr-control-arms.jpg" alt="BMR Suspension"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Handling</div><div class="rating">★★★★★ <span>(Top)</span></div></div>
+        <p class="name">BMR Control Arms (various)</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$249.99+</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">We’ll pick what your build needs.</span>
+      </div>
+    </div>
+
+    <div class="product" data-cat="suspension" data-name="Coilover Kit" data-price="1099.99">
+      <div class="thumb"><img src="shop-img/coilovers.jpg" alt="Coilover Kit"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Street/Track</div><div class="rating">★★★★☆ <span>(Varies)</span></div></div>
+        <p class="name">Coilover Kit (various)</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$1,099.99+</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">We’ll build a setup for your budget.</span>
+      </div>
+    </div>
+
+    <!-- WHEELS -->
+    <div class="product" data-cat="wheels" data-name="Wheel Set" data-price="1499.99">
+      <div class="thumb"><img src="shop-img/wheels-set.jpg" alt="Wheels"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Style</div><div class="rating">★★★★★ <span>(Varies)</span></div></div>
+        <p class="name">Wheel Set (various)</p>
+        <p class="fit">(Sizes vary by year)</p>
+        <p class="price">$1,499.99+</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">We can help with offsets/fitment.</span>
+      </div>
+    </div>
+
+    <!-- LIGHTING -->
+    <div class="product" data-cat="lighting" data-name="LED Headlights" data-price="349.99">
+      <div class="thumb"><img src="shop-img/led-headlights.jpg" alt="LED Headlights"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">LED</div><div class="rating">★★★★☆ <span>(Varies)</span></div></div>
+        <p class="name">LED Headlights (various)</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$349.99+</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Install available.</span>
+      </div>
+    </div>
+
+    <!-- INTERIOR -->
+    <div class="product" data-cat="interior" data-name="Interior Upgrades" data-price="199.99">
+      <div class="thumb"><img src="shop-img/interior-upgrades.jpg" alt="Interior Upgrades"></div>
+      <div class="info">
+        <div class="badges"><div class="badge">Interior</div><div class="rating">★★★★☆ <span>(Varies)</span></div></div>
+        <p class="name">Interior Upgrades (various)</p>
+        <p class="fit">(Call with year/model)</p>
+        <p class="price">$199.99+</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Trim, shifters, seats, etc.</span>
       </div>
     </div>
 
   </div>
 </div>
+
+<script>
+  // Tabs
+  const tabs = document.querySelectorAll(".tab");
+  const cards = document.querySelectorAll(".product");
+  let currentCat = "all";
+
+  tabs.forEach(t => t.addEventListener("click", () => {
+    tabs.forEach(x => x.classList.remove("active"));
+    t.classList.add("active");
+    currentCat = t.dataset.cat;
+    filterAndSearch();
+  }));
+
+  // Search
+  const search = document.getElementById("search");
+  search.addEventListener("input", filterAndSearch);
+
+  function filterAndSearch(){
+    const q = (search.value || "").trim().toLowerCase();
+    cards.forEach(c => {
+      const cat = c.dataset.cat;
+      const name = (c.dataset.name || "").toLowerCase();
+      const visibleByCat = (currentCat === "all" || cat === currentCat);
+      const visibleBySearch = (!q || name.includes(q));
+      c.classList.toggle("hidden", !(visibleByCat && visibleBySearch));
+    });
+  }
+
+  // Sort
+  const sort = document.getElementById("sort");
+  const grid = document.getElementById("grid");
+  sort.addEventListener("change", () => {
+    const items = Array.from(cards);
+    const mode = sort.value;
+
+    const getPrice = (el) => parseFloat((el.dataset.price || "0").replace(/[^0-9.]/g,"")) || 0;
+    const getName = (el) => (el.dataset.name || "").toLowerCase();
+
+    if(mode === "priceLow") items.sort((a,b)=>getPrice(a)-getPrice(b));
+    if(mode === "priceHigh") items.sort((a,b)=>getPrice(b)-getPrice(a));
+    if(mode === "nameAZ") items.sort((a,b)=>getName(a).localeCompare(getName(b)));
+    // featured keeps original order (do nothing)
+
+    if(mode !== "featured"){
+      items.forEach(el => grid.appendChild(el));
+    }
+  });
+</script>
 
 </body>
 </html>
