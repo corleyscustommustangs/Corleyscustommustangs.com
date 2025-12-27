@@ -7,10 +7,14 @@
 
 <style>
 :root{
-  --bg:#0b0b0b; --text:#fff; --muted:#bdbdbd;
-  --orange:#ff7a00; --orange2:#ffb067;
+  --bg:#0b0b0b;
+  --text:#ffffff;
+  --muted:#bdbdbd;
+  --orange:#ff7a00;
+  --orange2:#ffb067;
   --border:rgba(255,255,255,.10);
-  --radius:16px; --max:1200px;
+  --radius:16px;
+  --max:1200px;
 }
 *{box-sizing:border-box}
 body{
@@ -28,7 +32,7 @@ a{color:inherit;text-decoration:none}
 /* Top bar */
 .topbar{
   position:sticky;top:0;z-index:50;
-  background:rgba(0,0,0,.78);
+  background:rgba(0,0,0,.8);
   backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.08);
 }
@@ -41,7 +45,8 @@ a{color:inherit;text-decoration:none}
 .logo{
   width:42px;height:42px;border-radius:14px;
   background:linear-gradient(135deg,var(--orange),var(--orange2));
-  display:grid;place-items:center;font-weight:900;color:#000;
+  display:grid;place-items:center;
+  font-weight:900;color:#000;
 }
 nav a{
   padding:10px 12px;border-radius:12px;
@@ -52,97 +57,72 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
 .contact a{font-weight:900}
 
 /* Header */
-.header{padding:18px 0 10px}
-.header h1{margin:0;font-size:26px;letter-spacing:-.3px}
+.header{padding:22px 0 14px}
+.header h1{margin:0;font-size:28px}
 .header h1 span{color:var(--orange)}
 .header p{margin:8px 0 0;color:var(--muted);font-size:14px}
-
-/* Toolbar */
-.toolbar{
-  display:flex;gap:12px;flex-wrap:wrap;
-  align-items:center;justify-content:space-between;
-  border:1px solid var(--border);
-  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-  border-radius:var(--radius);
-  padding:12px;
-}
-.toolbar .left{
-  display:flex;gap:10px;flex-wrap:wrap;
-  align-items:center;flex:1;min-width:240px
-}
-.toolbar input, .toolbar select{
-  padding:12px 12px;border-radius:12px;
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(0,0,0,.35);
-  color:var(--text);
-}
-.toolbar input{min-width:240px;flex:1}
-.toolbar label{color:var(--muted);font-size:12px;font-weight:900}
-
-/* Tabs */
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
-.tab{
-  cursor:pointer;user-select:none;
-  padding:10px 12px;border-radius:999px;
-  border:1px solid rgba(255,122,0,.28);
-  background:rgba(255,122,0,.10);
-  color:#ffd2ad;font-weight:900;font-size:12px;
-}
-.tab.active{
-  background:linear-gradient(135deg,var(--orange),var(--orange2));
-  color:#000;border-color:rgba(0,0,0,.25);
-}
 
 /* Grid */
 .grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  padding:16px 0 22px;
+  gap:16px;
+  padding:10px 0 40px;
 }
 .card{
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
   border:1px solid var(--border);
   border-radius:var(--radius);
   overflow:hidden;
-  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
 }
 .thumb{
-  height:190px;
+  height:200px;
   background:#0d0d0d;
-  padding:12px;
-  display:flex;justify-content:center;align-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
   border-bottom:1px solid rgba(255,255,255,.08);
 }
-.thumb img{width:100%;height:100%;object-fit:contain;display:block}
-.info{padding:12px 12px 14px}
-.badges{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-.badge{
-  font-size:11px;font-weight:900;
-  padding:4px 8px;border-radius:8px;
-  border:1px solid rgba(255,122,0,.35);
-  background:rgba(255,122,0,.10);
-  color:#ffd2ad;
+.thumb img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
 }
-.brandTxt{font-size:12px;color:#d7d7d7;opacity:.9}
-.name{font-weight:1000;font-size:14px;line-height:1.25;margin:6px 0}
-.fit{margin:0 0 10px;color:var(--muted);font-size:12px}
-.price{font-weight:1000;font-size:20px;margin:0 0 10px}
+.info{padding:14px}
+.brandTxt{font-size:12px;color:#cfcfcf}
+.name{font-size:15px;font-weight:900;margin:6px 0}
+.fit{font-size:12px;color:var(--muted);margin:0 0 10px}
+.price{font-size:20px;font-weight:1000;margin:0 0 12px}
 .call{
-  display:block;width:100%;
+  display:block;
+  width:100%;
   text-align:center;
-  padding:10px 12px;border-radius:12px;
-  font-weight:1000;color:#000;
+  padding:12px;
+  border-radius:14px;
+  font-weight:1000;
+  color:#000;
   background:linear-gradient(135deg,var(--orange),var(--orange2));
 }
-.small{display:block;margin-top:8px;color:#a9a9a9;font-size:11px}
-.hidden{display:none !important}
+.small{
+  display:block;
+  margin-top:8px;
+  font-size:11px;
+  color:#a9a9a9;
+  text-align:center;
+}
 
-@media(max-width:1100px){ .grid{grid-template-columns:repeat(2,1fr)} }
-@media(max-width:650px){ .grid{grid-template-columns:1fr} }
+@media(max-width:1100px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+  .grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
 <body>
+
 <div class="topbar">
   <div class="wrap row">
     <div class="brand">
@@ -169,195 +149,48 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
 </div>
 
 <div class="wrap">
+
   <div class="header">
-    <h1><span>Shop</span> — 2005 to Current Mustang Parts</h1>
-    <p>Catalog layout. Real pricing goes in the list (no guessing). Call to order and we’ll verify fitment.</p>
+    <h1><span>Shop</span> — Mustang Parts (2005–Current)</h1>
+    <p>Reference pricing shown. Call to order and we’ll confirm fitment and availability.</p>
   </div>
 
-  <div class="toolbar">
-    <div class="left">
-      <input id="search" type="text" placeholder="Search parts (headers, x-pipe, whipple, intake, wheels, lights)..." />
-      <div>
-        <label for="year">Year Range</label><br>
-        <select id="year">
-          <option value="all">All (05–Current)</option>
-          <option value="05-09">2005–2009</option>
-          <option value="10-14">2010–2014</option>
-          <option value="15-17">2015–2017</option>
-          <option value="18-23">2018–2023</option>
-          <option value="24-25">2024–2025</option>
-        </select>
+  <div class="grid">
+
+    <!-- PRODUCT 1 -->
+    <div class="card">
+      <div class="thumb">
+        <img src="shop-img/bbk-xpipe.jpg" alt="BBK Catted X-Pipe">
       </div>
-      <div>
-        <label for="sort">Sort</label><br>
-        <select id="sort">
-          <option value="featured">Featured</option>
-          <option value="priceLow">Price: Low → High</option>
-          <option value="priceHigh">Price: High → Low</option>
-          <option value="nameAZ">Name: A → Z</option>
-        </select>
+      <div class="info">
+        <div class="brandTxt">BBK</div>
+        <div class="name">BBK Catted X-Pipe</div>
+        <p class="fit">2005–2010 Mustang GT (Long Tube Headers)</p>
+        <p class="price">$599.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Fitment verified before ordering</span>
       </div>
     </div>
-  </div>
 
-  <div class="tabs" id="tabs">
-    <div class="tab active" data-cat="all">All</div>
-    <div class="tab" data-cat="exhaust">Exhaust</div>
-    <div class="tab" data-cat="superchargers">Superchargers</div>
-    <div class="tab" data-cat="intake">Intake</div>
-    <div class="tab" data-cat="cams">Cams</div>
-    <div class="tab" data-cat="suspension">Suspension</div>
-    <div class="tab" data-cat="wheels">Wheels</div>
-    <div class="tab" data-cat="lighting">Lighting</div>
-    <div class="tab" data-cat="gaskets">Gaskets</div>
-    <div class="tab" data-cat="interior">Interior</div>
-    <div class="tab" data-cat="brakes">Brakes</div>
-    <div class="tab" data-cat="tuning">Tuning</div>
-  </div>
+    <!-- PRODUCT 2 -->
+    <div class="card">
+      <div class="thumb">
+        <img src="shop-img/bbk-longtubes.jpg" alt="BBK Long Tube Headers">
+      </div>
+      <div class="info">
+        <div class="brandTxt">BBK</div>
+        <div class="name">1-5/8&quot; Long Tube Headers (Ceramic)</div>
+        <p class="fit">2005–2010 Mustang GT</p>
+        <p class="price">$769.99</p>
+        <a class="call" href="tel:19183148648">Call to Order</a>
+        <span class="small">Professional installation recommended</span>
+      </div>
+    </div>
 
-  <div class="grid" id="grid"></div>
+    <!-- ADD MORE PRODUCTS BY COPYING A CARD -->
+
+  </div>
 </div>
-
-<script>
-const PHONE = "19183148648";
-
-/*
-✅ THIS IS WHERE REAL PRICING GOES.
-- price: use a real number (example 599.99)
-- img: put your uploaded image path like "shop-img/filename.jpg"
-If you don’t know price yet, set price: null and it will show "Call for price".
-*/
-const PRODUCTS = [
-  // Put your real products here.
-  // Example:
-  // {cat:"exhaust", year:"05-09", badge:"HOT", brand:"BBK", name:"BBK Catted X-Pipe", fit:"(05–10 GT w/ Long Tubes)", price:599.99, img:"shop-img/bbk-xpipe.jpg"},
-];
-
-// Auto-generate empty slots so you can fill 100 real items over time (NO fake prices)
-const YEAR_BUCKETS = [
-  {key:"05-09", label:"(2005–2009)"},
-  {key:"10-14", label:"(2010–2014)"},
-  {key:"15-17", label:"(2015–2017)"},
-  {key:"18-23", label:"(2018–2023)"},
-  {key:"24-25", label:"(2024–2025)"}
-];
-const CATS = [
-  ["exhaust","Exhaust"],["superchargers","Superchargers"],["intake","Intake"],
-  ["cams","Cams"],["suspension","Suspension"],["wheels","Wheels"],
-  ["lighting","Lighting"],["gaskets","Gaskets"],["interior","Interior"],
-  ["brakes","Brakes"],["tuning","Tuning"]
-];
-
-function addPlaceholderSlots(targetCount){
-  let i = PRODUCTS.length;
-  while(i < targetCount){
-    const cat = CATS[i % CATS.length][0];
-    const yr = YEAR_BUCKETS[i % YEAR_BUCKETS.length];
-    PRODUCTS.push({
-      cat: cat,
-      year: yr.key,
-      badge: "",
-      brand: "Add Product",
-      name: "Replace this slot with a real part",
-      fit: yr.label,
-      price: null,
-      img: "shop-img/placeholder.jpg"
-    });
-    i++;
-  }
-}
-
-// Make exactly 100 cards total
-addPlaceholderSlots(100);
-
-const grid = document.getElementById("grid");
-const tabs = document.querySelectorAll(".tab");
-const searchEl = document.getElementById("search");
-const yearEl = document.getElementById("year");
-const sortEl = document.getElementById("sort");
-
-let currentCat = "all";
-let currentYear = "all";
-
-function fmtPrice(p){
-  if (typeof p !== "number" || isNaN(p)) return "Call for price";
-  return "$" + p.toFixed(2);
-}
-
-function cardHTML(p){
-  const badgeHTML = p.badge ? `<div class="badge">${p.badge}</div>` : ``;
-  return `
-  <div class="card" data-cat="${p.cat}" data-year="${p.year}" data-name="${(p.name||"").toLowerCase()}" data-price="${typeof p.price==="number" ? p.price : 999999}">
-    <div class="thumb">
-      <img src="${p.img}" alt="${p.name}"
-        onerror="this.style.opacity=.22; this.style.filter='grayscale(1)';">
-    </div>
-    <div class="info">
-      <div class="badges">
-        ${badgeHTML}
-        <div class="brandTxt">${p.brand || ""}</div>
-      </div>
-      <div class="name">${p.name || ""}</div>
-      <p class="fit">${p.fit || ""}</p>
-      <p class="price">${fmtPrice(p.price)}</p>
-      <a class="call" href="tel:${PHONE}">Call to Order</a>
-      <span class="small">We verify fitment before ordering.</span>
-    </div>
-  </div>`;
-}
-
-function render(){
-  grid.innerHTML = PRODUCTS.map(cardHTML).join("");
-  applyFilters();
-}
-
-function applyFilters(){
-  const q = (searchEl.value || "").trim().toLowerCase();
-  const cards = Array.from(document.querySelectorAll(".card"));
-
-  cards.forEach(c => {
-    const cat = c.dataset.cat;
-    const yr = c.dataset.year;
-    const name = c.dataset.name;
-
-    const okCat = (currentCat === "all" || cat === currentCat);
-    const okYear = (currentYear === "all" || yr === currentYear);
-    const okSearch = (!q || name.includes(q));
-
-    c.classList.toggle("hidden", !(okCat && okYear && okSearch));
-  });
-}
-
-function sortCards(){
-  const cards = Array.from(document.querySelectorAll(".card"));
-  const mode = sortEl.value;
-
-  const getPrice = el => parseFloat(el.dataset.price || "0") || 0;
-  const getName = el => (el.dataset.name || "");
-
-  if(mode === "priceLow") cards.sort((a,b)=>getPrice(a)-getPrice(b));
-  if(mode === "priceHigh") cards.sort((a,b)=>getPrice(b)-getPrice(a));
-  if(mode === "nameAZ") cards.sort((a,b)=>getName(a).localeCompare(getName(b)));
-
-  if(mode !== "featured"){
-    cards.forEach(el => grid.appendChild(el));
-  }
-}
-
-// Tabs click
-tabs.forEach(t => t.addEventListener("click", () => {
-  tabs.forEach(x => x.classList.remove("active"));
-  t.classList.add("active");
-  currentCat = t.dataset.cat;
-  applyFilters();
-}));
-
-searchEl.addEventListener("input", applyFilters);
-yearEl.addEventListener("change", () => { currentYear = yearEl.value; applyFilters(); });
-sortEl.addEventListener("change", () => { sortCards(); });
-
-render();
-</script>
 
 </body>
 </html>
