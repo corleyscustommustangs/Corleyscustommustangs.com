@@ -66,7 +66,10 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
   border-radius:var(--radius);
   padding:12px;
 }
-.toolbar .left{display:flex;gap:10px;flex-wrap:wrap;align-items:center;flex:1;min-width:240px}
+.toolbar .left{
+  display:flex;gap:10px;flex-wrap:wrap;
+  align-items:center;flex:1;min-width:240px
+}
 .toolbar input, .toolbar select{
   padding:12px 12px;border-radius:12px;
   border:1px solid rgba(255,255,255,.10);
@@ -134,23 +137,23 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
 .small{display:block;margin-top:8px;color:#a9a9a9;font-size:11px}
 .hidden{display:none !important}
 
-/* Request box */
-.request{
+/* Footer note box */
+.noteBox{
   border:1px solid var(--border);
   background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
   border-radius:var(--radius);
   padding:14px;
   margin:0 0 34px;
 }
-.request h2{margin:0 0 8px;font-size:16px}
-.request p{margin:0;color:var(--muted);font-size:13px}
-.request .btnRow{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
-.request .btn{
+.noteBox h2{margin:0 0 8px;font-size:16px}
+.noteBox p{margin:0;color:var(--muted);font-size:13px}
+.noteBox .btnRow{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+.noteBox .btn{
   padding:10px 12px;border-radius:12px;font-weight:1000;
   background:rgba(0,0,0,.35);
   border:1px solid rgba(255,255,255,.10);
 }
-.request .btn.primary{
+.noteBox .btn.primary{
   background:linear-gradient(135deg,var(--orange),var(--orange2));
   color:#000;border-color:rgba(0,0,0,.25);
 }
@@ -189,7 +192,7 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
 <div class="wrap">
   <div class="header">
     <h1><span>Shop</span> — 2005 to Current Mustang Parts</h1>
-    <p>Real parts. Real pricing. Call to order and we’ll verify fitment before you spend money.</p>
+    <p>Catalog-style layout. Call to order and we’ll verify fitment.</p>
   </div>
 
   <div class="toolbar">
@@ -229,11 +232,13 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
     <div class="tab" data-cat="lighting">Lighting</div>
     <div class="tab" data-cat="gaskets">Gaskets</div>
     <div class="tab" data-cat="interior">Interior</div>
+    <div class="tab" data-cat="brakes">Brakes</div>
+    <div class="tab" data-cat="tuning">Tuning</div>
   </div>
 
   <div class="grid" id="grid"></div>
 
-  <div class="request">
+  <div class="noteBox">
     <h2>Want a part that isn’t listed?</h2>
     <p>We can order anything for 2005–current Mustangs. Call or email what you need and we’ll quote it.</p>
     <div class="btnRow">
@@ -244,58 +249,90 @@ nav a:hover{background:rgba(255,122,0,.12);color:#fff}
 </div>
 
 <script>
-/*
-HOW TO ADD PRODUCTS:
-1) Upload the product image into your repo folder: /shop-img/
-2) Add a new object below in the PRODUCTS list.
-3) Refresh your site.
-
-Image path format: "shop-img/your-file.jpg"
-*/
-
-const PRODUCTS = [
-  // EXHAUST (examples)
-  {
-    cat:"exhaust", year:"05-09", brand:"BBK",
-    name:"BBK Catted X-Pipe",
-    fit:"(05–10 Mustang GT w/ Long Tube Headers)",
-    price:599.99,
-    img:"shop-img/bbk-xpipe.jpg",
-    badge:"HOT"
-  },
-  {
-    cat:"exhaust", year:"05-09", brand:"BBK",
-    name:"BBK 1-5/8\" Long Tube Headers (Polished Ceramic)",
-    fit:"(05–10 Mustang GT)",
-    price:819.99,
-    img:"shop-img/bbk-lt-polished.jpg",
-    badge:"HOT"
-  },
-  {
-    cat:"exhaust", year:"05-09", brand:"BBK",
-    name:"BBK 1-5/8\" Long Tube Headers (Titanium Ceramic)",
-    fit:"(05–10 Mustang GT)",
-    price:769.99,
-    img:"shop-img/bbk-lt-titanium.jpg",
-    badge:"HOT"
-  },
-
-  // GASKETS (examples)
-  {
-    cat:"gaskets", year:"05-09", brand:"BBK",
-    name:"BBK Premium Header Gaskets",
-    fit:"(05–10 Mustang GT)",
-    price:29.99,
-    img:"shop-img/bbk-header-gaskets.jpg",
-    badge:"Recommended"
-  },
-
-  // Add as many as you want below (real pricing, real pics you upload):
-  // { cat:"superchargers", year:"15-17", brand:"Whipple", name:"Whipple Gen 5 Kit", fit:"(2015–2017 GT)", price:0, img:"shop-img/whipple.jpg", badge:"Boost" },
-];
-
 const PHONE = "19183148648";
 
+/*
+IMAGES:
+Put your images in: /shop-img/
+If an image is missing, it will still show the card—just the image will fade out.
+*/
+const IMG_FALLBACK = "shop-img/placeholder.jpg"; // optional: upload one placeholder image
+
+// Generates a clean starter 100-product catalog (you can replace items with real exact ones anytime)
+const YEAR_BUCKETS = [
+  {key:"05-09", label:"(2005–2009 S197)"},
+  {key:"10-14", label:"(2010–2014 S197)"},
+  {key:"15-17", label:"(2015–2017 S550)"},
+  {key:"18-23", label:"(2018–2023 S550)"},
+  {key:"24-25", label:"(2024–2025 S650)"}
+];
+
+const CATEGORIES = [
+  {cat:"exhaust", title:"Exhaust", brands:["Borla","Corsa","Roush","MBRP","Flowmaster","BBK"], names:["Axle-Back Exhaust","Cat-Back Exhaust","Long Tube Headers","Mid-Pipe / X-Pipe","H-Pipe","Header Gaskets","O2 Extensions","Resonator Delete"]},
+  {cat:"superchargers", title:"Superchargers", brands:["Whipple","Vortech","ProCharger","Edelbrock","Ford Performance"], names:["Complete Supercharger Kit","Intercooler Upgrade","Belt Drive Kit","Pulley Upgrade","Heat Exchanger","Boost-a-Pump"]},
+  {cat:"intake", title:"Intake", brands:["JLT","Roush","K&N","Airaid","Steeda","Ford Performance"], names:["Cold Air Intake","Open Element Intake","Closed Box Intake","Throttle Body","Intake Tube","Filter Recharge Kit"]},
+  {cat:"cams", title:"Cams", brands:["Ford Performance","Comp Cams","CMS","Livernois"], names:["Camshaft Set","Valve Spring Kit","Timing Kit","Phaser Lockout Kit","Lifters (set)","Gasket Set (valvetrain)"]},
+  {cat:"suspension", title:"Suspension", brands:["BMR","Steeda","Eibach","SR Performance","BC Racing","KW"], names:["Lowering Springs","Coilover Kit","Control Arms","Panhard Bar","Sway Bar Kit","Alignment Kit","Adjustable Shocks/Struts"]},
+  {cat:"wheels", title:"Wheels", brands:["RTR","SVE","Ford Performance","Apex","Velgen"], names:["Wheel Set (4)","Front Wheels (pair)","Rear Wheels (pair)","Wheel/Tire Package","Lug Nut Kit","Hub-Centric Rings"]},
+  {cat:"lighting", title:"Lighting", brands:["Oracle","Morimoto","Diode Dynamics","Raxiom","SVE"], names:["LED Headlights","LED Tail Lights","Side Marker Lights","Fog Light Kit","Interior LED Kit","Underglow Kit"]},
+  {cat:"gaskets", title:"Gaskets", brands:["Fel-Pro","Ford Racing","MAHLE","Cometic"], names:["Valve Cover Gasket Set","Header Gasket Set","Intake Gasket Set","Oil Pan Gasket","Front Cover Gasket Set","Spark Plug Tube Seals"]},
+  {cat:"interior", title:"Interior", brands:["Ford Performance","RTR","MGP","WeatherTech"], names:["Shift Knob","Floor Mats","Seat Brackets","Gauge Pod","Steering Wheel","Interior Trim Kit"]},
+  {cat:"brakes", title:"Brakes", brands:["Brembo","Power Stop","Wilwood","StopTech"], names:["Front Brake Kit","Rear Brake Kit","Brake Pads","Rotors (pair)","Stainless Brake Lines","Brake Fluid"]},
+  {cat:"tuning", title:"Tuning", brands:["SCT","HP Tuners","Lund","VMP"], names:["Handheld Tuner","Tuning Credits","Wideband Kit","Boost Gauge","Data Cable","Remote Tune (service)"]}
+];
+
+function priceGuess(cat){
+  // Just a starter catalog. Replace with real exact pricing per item as you add them.
+  const ranges = {
+    exhaust:[149,1899],
+    superchargers:[499,9999],
+    intake:[149,699],
+    cams:[399,1499],
+    suspension:[129,2499],
+    wheels:[399,2999],
+    lighting:[49,1099],
+    gaskets:[29,399],
+    interior:[39,999],
+    brakes:[99,2999],
+    tuning:[99,799]
+  };
+  const r = ranges[cat] || [99,999];
+  const val = (Math.random()*(r[1]-r[0]) + r[0]);
+  return Math.round(val/10)*10 + 0.99;
+}
+
+function safeImg(filename){
+  return filename ? `shop-img/${filename}` : IMG_FALLBACK;
+}
+
+// Build 100 items evenly across categories + years
+const PRODUCTS = [];
+let count = 0;
+
+for (let c=0; c<CATEGORIES.length && count<100; c++){
+  const cat = CATEGORIES[c];
+  for (let y=0; y<YEAR_BUCKETS.length && count<100; y++){
+    const yr = YEAR_BUCKETS[y];
+    for (let i=0; i<2 && count<100; i++){ // 2 items per (category, year bucket) gives a big catalog fast
+      const brand = cat.brands[(count + i) % cat.brands.length];
+      const itemName = cat.names[(count + i) % cat.names.length];
+      const name = `${brand} ${itemName}`;
+      PRODUCTS.push({
+        cat: cat.cat,
+        year: yr.key,
+        badge: (count % 7 === 0) ? "HOT" : (count % 9 === 0) ? "Popular" : "",
+        brand: brand,
+        name: name,
+        fit: yr.label,
+        price: priceGuess(cat.cat),
+        img: safeImg("") // start with placeholder until you upload real images
+      });
+      count++;
+    }
+  }
+}
+
+// Render
 const grid = document.getElementById("grid");
 const tabs = document.querySelectorAll(".tab");
 const searchEl = document.getElementById("search");
@@ -312,17 +349,18 @@ function fmtPrice(p){
 
 function cardHTML(p){
   return `
-  <div class="card" data-cat="${p.cat}" data-year="${p.year}" data-name="${p.name.toLowerCase()}" data-price="${p.price || 0}">
+  <div class="card" data-cat="${p.cat}" data-year="${p.year}" data-name="${p.name.toLowerCase()}" data-price="${p.price}">
     <div class="thumb">
-      <img src="${p.img}" alt="${p.name}" onerror="this.style.opacity=.25; this.style.filter='grayscale(1)';">
+      <img src="${p.img}" alt="${p.name}"
+        onerror="this.style.opacity=.22; this.style.filter='grayscale(1)';">
     </div>
     <div class="info">
       <div class="badges">
         ${p.badge ? `<div class="badge">${p.badge}</div>` : ``}
-        <div class="brandTxt">${p.brand || ""}</div>
+        <div class="brandTxt">${p.brand}</div>
       </div>
       <div class="name">${p.name}</div>
-      <p class="fit">${p.fit || ""}</p>
+      <p class="fit">${p.fit}</p>
       <p class="price">${fmtPrice(p.price)}</p>
       <a class="call" href="tel:${PHONE}">Call to Order</a>
       <span class="small">We verify fitment before ordering.</span>
@@ -368,6 +406,7 @@ function sortCards(){
   }
 }
 
+// Tabs click
 tabs.forEach(t => t.addEventListener("click", () => {
   tabs.forEach(x => x.classList.remove("active"));
   t.classList.add("active");
